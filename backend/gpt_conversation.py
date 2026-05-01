@@ -28,7 +28,7 @@ def generate_conversations(txtbook_txt):
         }
     
     data = {
-        "model": "mistralai/Mixtral-8x7B-Instruct-v0.1",  
+        "model": "meta-llama/Llama-3-8b-chat-hf",  
         "prompt": prompt,
         "max_tokens": 1024,
         "temperature": 0.7
