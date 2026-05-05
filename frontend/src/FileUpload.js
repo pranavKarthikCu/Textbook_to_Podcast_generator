@@ -30,7 +30,7 @@ const FileUpload = ({ setConversation }) => {
     formData.append("end_pg", endPg);
 
     try {
-      const response = await axios.post("http://localhost:5000/upload", formData);
+      const response = await axios.post("https://textbook-to-podcast-generator.onrender.com/upload", formData);
       setConversation(response.data.conversation);
       setStatus("Conversation ready — edit it, then generate audio");
     } catch (err) {
