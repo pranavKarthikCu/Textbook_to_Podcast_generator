@@ -1,6 +1,10 @@
-import requests
 import os
+from groq import Groq
+from dotenv import load_dotenv
 
+load_dotenv()
+
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 def generate_conversations(txtbook_txt):
     prompt = f"""
@@ -13,7 +17,7 @@ def generate_conversations(txtbook_txt):
 
     Instructions:
     - Use casual but intelligent language
-    - Limit each speaker’s turn to 2–4 sentences
+    - Limit each speaker's turn to 2–4 sentences
     - Break down technical terms using analogies or simple examples
     - Include follow-up questions and clarifications from Alex
 
@@ -22,25 +26,13 @@ def generate_conversations(txtbook_txt):
     Sam: ...
     """
 
-    headers = { 
-            "Authorization" : f"Bearer {os.getenv('TOGETHER_API_KEY')}",
-            "Content-Type": "application/json"
-        }
-    
-    data = {
-        "model": "meta-llama/Llama-3-8b-chat-hf",  
-        "prompt": prompt,
-        "max_tokens": 1024,
-        "temperature": 0.7
-    }
-
-    response = requests.post(
-        "https://api.together.xyz/v1/completions",
-        headers=headers,
-        json=data
+    response = client.chat.completions.create(
+        model="llama-3.1-8b-instant", 
+        messages=[
+            {"role": "user", "content": prompt}
+        ],
+        max_tokens=1024,
+        temperature=0.7
     )
 
-    if response.status_code == 200:
-        return response.json()["choices"][0]["text"]
-    else:
-        return f"Error: {response.status_code}, {response.text}"
+    return response.choices[0].message.content
