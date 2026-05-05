@@ -1,6 +1,8 @@
-python-dotenv
-requests
-pymupdf
+groq
 flask
 flask-cors
+pymupdf
+python-dotenv
+requests
 gunicorn
+elevenlabs
