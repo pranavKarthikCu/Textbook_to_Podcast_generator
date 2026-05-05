@@ -3,3 +3,4 @@ requests
 pymupdf
 flask
 flask-cors
+gunicorn
