@@ -23,7 +23,7 @@ const AudioPlayer = ({ conversation }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/tts",
+        "https://textbook-to-podcast-generator.onrender.com/tts",
         { conversation, voice_id: voice },
         { responseType: "blob" }
       );
